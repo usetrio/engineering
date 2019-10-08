@@ -12,7 +12,7 @@ jobs:
       - run: bundle exec jekyll build
       - deploy:
           name: Deploy Release to GitHub
-          command: .circle/deploy-github.sh
+          command: .circleci/deploy-github.sh
 workflows:
   version: 2
   build:
