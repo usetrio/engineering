@@ -1,0 +1,12 @@
+source 'https://rubygems.org'
+
+gem 'jekyll'
+gem 'jekyll-paginate'
+gem 'jekyll-assets'
+gem 'jekyll-extlinks'
+gem 'html-proofer'
+gem 'redcarpet'
+gem 'citeproc-ruby'
+gem 'bibtex-ruby'
+gem 'csl-styles'
+gem 'unicode_utils'
