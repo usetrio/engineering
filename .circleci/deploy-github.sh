@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -eo pipefail
+
 git config user.name "$GH_USER_NAME"
 git config user.email "$GH_USER_EMAIL"
 
