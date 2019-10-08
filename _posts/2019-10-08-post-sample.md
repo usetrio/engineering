@@ -19,7 +19,7 @@ Content
 ## Uploads Sample
 You can upload images and show them here:
 
-![](/uploads/2019-10-post-sample/sample-1.png)
+![Step 1](/uploads/2019-10-post-sample/sample-1.png)
 
 But do not forget to generate all the needed ones:
 
