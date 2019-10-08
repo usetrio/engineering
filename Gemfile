@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'jekyll', '3.8.5'
 gem 'jekyll-paginate', '1.1.0'
-gem 'jekyll-assets', '2.3.2'
+gem 'jekyll-assets', '3.0.12'
 gem 'jekyll-extlinks', '0.0.4'
 gem 'html-proofer', '3.10.0'
 gem 'kramdown', '1.17.0'
