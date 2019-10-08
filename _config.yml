@@ -1,0 +1,27 @@
+markdown: redcarpet
+markdown_ext: markdown,mkd,mkdn,md
+highlighter: rouge
+permalink: /:year/:month/:title/
+safe: false
+exclude: ['README.md', 'tmp/', 'Gemfile', 'Gemfile.lock']
+paginate: 5
+
+plugins:
+  - jekyll-paginate
+  - jekyll-assets
+  - jekyll-extlinks
+
+excerpt_separator: <!--more-->
+
+assets:
+  compression: true
+  sources:
+    - "_assets/css"
+    - "_assets/js"
+
+redcarpet:
+  extensions: ["footnotes"]
+
+extlinks:
+  attributes: {target: _blank, class: 'external'}
+  rel_exclude: ['engineering.trio.dev']
