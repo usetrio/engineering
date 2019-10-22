@@ -10,6 +10,5 @@ The following directories and their contents are Copyright Trio's. You may not r
 
 * _data/
 * _posts/
-* uploads/
 
 All other directories and files are MIT Licensed.

@@ -1,8 +1,9 @@
-_site
-_drafts
-.asset-cache
-_asset-cache
-.idea
-.jekyll-metadata
-_scripts/tmp
-.jekyll-cache
+/_site
+/_drafts
+/.asset-cache
+/_asset-cache
+/.jekyll-metadata
+/_scripts/tmp
+/.jekyll-cache
+/uploads/*
+!/uploads/.keep
