@@ -1,7 +1,7 @@
 require 'fileutils'
 
 module Jekyll
-    class PostUploadSync
+    class PostsContentSync
         attr_accessor :site
 
         def initialize(site)
@@ -86,6 +86,6 @@ module Jekyll
 end
 
 Jekyll::Hooks.register(:site, :after_init) do |site|
-    content_manager = Jekyll::PostUploadSync.new(site)
+    content_manager = Jekyll::PostsContentSync.new(site)
     content_manager.run
 end
