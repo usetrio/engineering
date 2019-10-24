@@ -11,6 +11,8 @@ If you're looking for creating new posts, you should [take a look here](https://
 1. Fork the `master` branch
 2. Do your changes
 3. Create a Pull Request
+4. Wait for your PR be reviewed
+5. When you PR get merged, it'll automatically trigger the [deploy workflow](https://github.com/usetrio/trio-engineering-blog/blob/master/.circleci/config.yml#L3-L17)
 
 ## Running
 1. You must have installed `ruby 2.5+`
