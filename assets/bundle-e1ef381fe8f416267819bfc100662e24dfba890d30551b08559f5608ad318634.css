@@ -136,6 +136,7 @@ header {
     width: 60px;
     height: 60px; }
     header .logo img {
+      display: block;
       height: 60px;
       width: 60px; }
   header .brand-name {
