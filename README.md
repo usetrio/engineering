@@ -1,4 +1,4 @@
-# Trio Engineering Blog
+# Trio Engineering Blog [![CircleCI](https://circleci.com/gh/usetrio/trio-engineering-blog.svg?style=svg)](https://circleci.com/gh/usetrio/trio-engineering-blog)
 This is the source code of [Trio Engineering Blog - engineering.trio.dev](https://engineering.trio.dev). It's a static website built with [Jekyll](http://jekyllrb.com/).
 
 ## Cloning
