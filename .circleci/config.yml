@@ -19,6 +19,12 @@ jobs:
     docker:
       - image: circleci/ruby:2.4.3-node-browsers
     steps:
+      - checkout
+      - run:
+          name: Pull Submodules
+          command: |
+            git submodule init
+            git submodule update --remote
       - run:
           name: Update Posts
           command: .circleci/update-posts.sh
