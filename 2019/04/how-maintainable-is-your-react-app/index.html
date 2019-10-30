@@ -193,41 +193,41 @@
 
 <p>Essentially, we have a similar folder structure and files as with the modules. The goal here is to have isolation throughout the modules while still following the <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself" target="_blank" class="external">DRY</a> approach; that’s why we have <code class="highlighter-rouge">reducer</code> files for each module that use this feature, for example. To better understand their modularity, let’s dive deeper into some files and folders. Since each module exports similar files we’re able to get all the modules routes at once by doing something like this:</p>
 
-<pre><code class="language-es6">import { getModulesMetavalues } from 'moduleReader';
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">getModulesMetavalues</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'moduleReader'</span><span class="p">;</span>
 
-getModulesMetavalues('routes');
-</code></pre>
+<span class="nx">getModulesMetavalues</span><span class="p">(</span><span class="s1">'routes'</span><span class="p">);</span>
+</code></pre></div></div>
 
 <p>The logic behind the <code class="highlighter-rouge">getModulesMetavalues</code> is actually pretty simple, it just iterates a specific key from all of the registered modules:</p>
 
-<pre><code class="language-es6">import * as modules from 'modules';
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">modules</span> <span class="k">from</span> <span class="s1">'modules'</span><span class="p">;</span>
 
-export const getModulesMetadata = (key) =&gt;
-  Object.keys((modules)).reduce((acc, module) =&gt; {
-    if (typeof modules[module] !== 'object') {
-      console.warn(`Provide a object export for module ${module}`);
-    }
-    if (key in modules[module]) {
-      return { ...acc, [module]: modules[module][key] };
-    }
-    return acc;
-  }, {});
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">getModulesMetadata</span> <span class="o">=</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">=&gt;</span>
+  <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">((</span><span class="nx">modules</span><span class="p">)).</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acc</span><span class="p">,</span> <span class="nx">module</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">modules</span><span class="p">[</span><span class="nx">module</span><span class="p">]</span> <span class="o">!==</span> <span class="s1">'object'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s2">`Provide a object export for module </span><span class="p">${</span><span class="nx">module</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">modules</span><span class="p">[</span><span class="nx">module</span><span class="p">])</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{</span> <span class="p">...</span><span class="nx">acc</span><span class="p">,</span> <span class="p">[</span><span class="nx">module</span><span class="p">]:</span> <span class="nx">modules</span><span class="p">[</span><span class="nx">module</span><span class="p">][</span><span class="nx">key</span><span class="p">]</span> <span class="p">};</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">acc</span><span class="p">;</span>
+  <span class="p">},</span> <span class="p">{});</span>
 
-export const getModulesMetavalues = (key) =&gt;
-  Object.values(getModulesMetadata(key)).flat();
-</code></pre>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">getModulesMetavalues</span> <span class="o">=</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">=&gt;</span>
+  <span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">getModulesMetadata</span><span class="p">(</span><span class="nx">key</span><span class="p">)).</span><span class="nx">flat</span><span class="p">();</span>
+</code></pre></div></div>
 <p>So essentially, our main module file (e.g. <em>src/modules/members/index.js</em>) must export the routes and other features like this:</p>
 
-<pre><code class="language-es6">import * as components from './components';
-import * as containers from './containers';
-import * as actions from './actions';
-import menu from './menu';
-import reducer from './reducer';
-import routes from './routes';
-import * as selectors from './selectors';
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">components</span> <span class="k">from</span> <span class="s1">'./components'</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">containers</span> <span class="k">from</span> <span class="s1">'./containers'</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">actions</span> <span class="k">from</span> <span class="s1">'./actions'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">menu</span> <span class="k">from</span> <span class="s1">'./menu'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">reducer</span> <span class="k">from</span> <span class="s1">'./reducer'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">routes</span> <span class="k">from</span> <span class="s1">'./routes'</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">selectors</span> <span class="k">from</span> <span class="s1">'./selectors'</span><span class="p">;</span>
 
-export { components, containers, actions, menu, reducer, routes, selectors };
-</code></pre>
+<span class="k">export</span> <span class="p">{</span> <span class="nx">components</span><span class="p">,</span> <span class="nx">containers</span><span class="p">,</span> <span class="nx">actions</span><span class="p">,</span> <span class="nx">menu</span><span class="p">,</span> <span class="nx">reducer</span><span class="p">,</span> <span class="nx">routes</span><span class="p">,</span> <span class="nx">selectors</span> <span class="p">};</span>
+</code></pre></div></div>
 
 <p>This files and nomenclature are just convention among modules to make them easier to predict but you’re free to export anything else from a module.</p>
 
@@ -237,77 +237,77 @@ export { components, containers, actions, menu, reducer, routes, selectors };
 <h4 id="routerjs">router.js</h4>
 <p>The router file is supposed to export a simple <a href="https://reacttraining.com/react-router/web/api/Route" target="_blank" class="external">Route</a> component from the <a href="https://reacttraining.com/react-router/" target="_blank" class="external">React Router library</a>. This way, you can get them to use as <code class="highlighter-rouge">children</code> inside the Switch component:</p>
 
-<pre><code class="language-es6">// src/modules/app/containers/App/index.js
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/modules/app/containers/App/index.js</span>
 
-import mapProps from 'map-props';
-import { App } from 'modules/app/components';
-import { getModulesMetavalues } from 'moduleReader';
+<span class="k">import</span> <span class="nx">mapProps</span> <span class="k">from</span> <span class="s1">'map-props'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">App</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'modules/app/components'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">getModulesMetavalues</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'moduleReader'</span><span class="p">;</span>
 
-export default mapProps({
-  children: () =&gt; getModulesMetavalues('routes')
-})(App);
-</code></pre>
+<span class="k">export</span> <span class="k">default</span> <span class="nx">mapProps</span><span class="p">({</span>
+  <span class="na">children</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">getModulesMetavalues</span><span class="p">(</span><span class="s1">'routes'</span><span class="p">)</span>
+<span class="p">})(</span><span class="nx">App</span><span class="p">);</span>
+</code></pre></div></div>
 
-<pre><code class="language-es6">// src/modules/app/components/App/index.js
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/modules/app/components/App/index.js</span>
 
-render() {
-  return (
-    &lt;Switch&gt;{this.props.children}&lt;/Switch&gt;
-  );
-}
-</code></pre>
+<span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">Switch</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">children</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/Switch</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h4 id="menusjs">menus.js</h4>
 <p>The menu file is intended to help you with creating dynamic menu links. All you need to do is to return a simple React component containing your link:</p>
 
-<pre><code class="language-es6">// src/modules/members/menu.js
-import { MembersMenu } from './components';
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/modules/members/menu.js</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MembersMenu</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./components'</span><span class="p">;</span>
 
-export default MembersMenu;
-</code></pre>
+<span class="k">export</span> <span class="k">default</span> <span class="nx">MembersMenu</span><span class="p">;</span>
+</code></pre></div></div>
 
-<pre><code class="language-es6">// src/modules/app/containers/Navigation/index.js
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/modules/app/containers/Navigation/index.js</span>
 
-import mapProps from 'map-props';
-import { Navigation } from 'modules/app/components';
-import { getModulesMetavalues } from 'moduleReader';
+<span class="k">import</span> <span class="nx">mapProps</span> <span class="k">from</span> <span class="s1">'map-props'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Navigation</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'modules/app/components'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">getModulesMetavalues</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'moduleReader'</span><span class="p">;</span>
 
-export default mapProps({
-  children: () =&gt; getModulesMetavalues('menu')
-})(App);
-</code></pre>
+<span class="k">export</span> <span class="k">default</span> <span class="nx">mapProps</span><span class="p">({</span>
+  <span class="na">children</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">getModulesMetavalues</span><span class="p">(</span><span class="s1">'menu'</span><span class="p">)</span>
+<span class="p">})(</span><span class="nx">App</span><span class="p">);</span>
+</code></pre></div></div>
 
 <h4 id="reducerjs">reducer.js</h4>
 <p>The reducer file is supposed to return only a single reducer. If you have to have more than a single tree-leaf, use the <code class="highlighter-rouge">combineReducers</code> function.</p>
 
-<pre><code class="language-es6">import { combineReducers } from 'redux-immutable';
-import { buildRequestReducer } from 'modules/api/reducer';
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">combineReducers</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'redux-immutable'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">buildRequestReducer</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'modules/api/reducer'</span><span class="p">;</span>
 
-const list = buildRequestReducer('fetchMembers');
+<span class="kd">const</span> <span class="nx">list</span> <span class="o">=</span> <span class="nx">buildRequestReducer</span><span class="p">(</span><span class="s1">'fetchMembers'</span><span class="p">);</span>
 
-export default combineReducers({ list });
-</code></pre>
+<span class="k">export</span> <span class="k">default</span> <span class="nx">combineReducers</span><span class="p">({</span> <span class="nx">list</span> <span class="p">});</span>
+</code></pre></div></div>
 
 <h4 id="selectorsjs">selectors.js</h4>
 <p>The selectors file is supposed to have getters from the redux state tree. Try to follow the <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself" target="_blank" class="external">DRY</a> approach by composing and reusing other selectors with <a href="https://github.com/reduxjs/reselect" target="_blank" class="external">reselect</a> library.</p>
 
-<pre><code class="language-es6">// src/modules/members/selectors.js
-import { createSelector } from 'reselect';
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/modules/members/selectors.js</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">createSelector</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'reselect'</span><span class="p">;</span>
 
-export const getMembers = state =&gt; state.members;
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">getMembers</span> <span class="o">=</span> <span class="nx">state</span> <span class="o">=&gt;</span> <span class="nx">state</span><span class="p">.</span><span class="nx">members</span><span class="p">;</span>
 
-export const getMembersList = createSelector(getMembers, state =&gt; state.list);
-</code></pre>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">getMembersList</span> <span class="o">=</span> <span class="nx">createSelector</span><span class="p">(</span><span class="nx">getMembers</span><span class="p">,</span> <span class="nx">state</span> <span class="o">=&gt;</span> <span class="nx">state</span><span class="p">.</span><span class="nx">list</span><span class="p">);</span>
+</code></pre></div></div>
 
 <h4 id="actionsjs">actions.js</h4>
 <p>The actions file is supposed to have both sync and async actions with a descriptive name of what they’re expected to do. Try also to follow the <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself" target="_blank" class="external">DRY</a> approach by reusing other modules actions whenever you can:</p>
 
-<pre><code class="language-es6">// src/modules/members/actions.js
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/modules/members/actions.js</span>
 
-import { buildRequestAction } from 'modules/api/actions';
+<span class="k">import</span> <span class="p">{</span> <span class="nx">buildRequestAction</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'modules/api/actions'</span><span class="p">;</span>
 
-export const fetchMembersList = buildRequestAction('fetchMembers');
-</code></pre>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">fetchMembersList</span> <span class="o">=</span> <span class="nx">buildRequestAction</span><span class="p">(</span><span class="s1">'fetchMembers'</span><span class="p">);</span>
+</code></pre></div></div>
 
 <h4 id="components">/components</h4>
 <p>The components folder is supposed to have only <a href="https://medium.com/@yassimortensen/container-vs-presentational-components-in-react-8eea956e1cea" target="_blank" class="external">presentational components</a>. <em>i.e. they don’t know how to load states and are main focused on working with a good properties support.</em></p>
@@ -321,8 +321,8 @@ export const fetchMembersList = buildRequestAction('fetchMembers');
 <h4 id="files-imports">Files imports</h4>
 <p>Consider using <a href="https://itnext.io/configure-absolute-paths-with-create-react-app-and-flow-e4b8922676a2" target="_blank" class="external">absolute paths</a> like this if you’re trying to import a file inside or outside of your module. It makes moving files across modules easier:</p>
 
-<pre><code class="language-es6">import { buildRequestAction } from 'modules/api/actions';
-</code></pre>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">buildRequestAction</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'modules/api/actions'</span><span class="p">;</span>
+</code></pre></div></div>
 
 <h4 id="components-structure">Components structure</h4>
 <p>Usually, we’ll have multiple files related to the same component <em>(e.g. styles, tests, etc)</em> and to better organize, that I like to group them into the same folder. Instead of creating a file <code class="highlighter-rouge">components/MembersList.js</code>, I create a file <code class="highlighter-rouge">components/MembersList/index.js</code> which makes it easier to put all related files together.</p>
@@ -434,7 +434,7 @@ src/modules/members/actions/e2e.test.js
     </p>
 </footer>
 
-<script type="text/javascript" src="/assets/all-0411708cab7cd4507b2e8f351a3db8e418e58b702d9fb49f947b04821bc42056.js"></script>
+<script src="/assets/all-0411708cab7cd4507b2e8f351a3db8e418e58b702d9fb49f947b04821bc42056.js" type="text/javascript"></script>
 
 </body>
 </html>
