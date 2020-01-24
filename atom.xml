@@ -3,10 +3,29 @@
 	<title>engineering.trio.dev</title>
 	<link href='https://engineering.trio.dev/'/>
 	<link type='application/atom+xml' rel='self' href='https://engineering.trio.dev/atom.xml'/>
-	<updated>2019-10-30T20:23:51+00:00</updated>
+	<updated>2020-01-24T17:24:11+00:00</updated>
 	<id>https://engineering.trio.dev/</id>
 
 	
+	<entry>
+		<title>How to create and publish your first configurable Ruby Gem</title>
+		<link type='text/html' href='https://engineering.trio.dev/2020/01/how-to-create-and-publish-your-first-configurable-ruby-gem/'/>
+		<id>https://engineering.trio.dev/2020/01/how-to-create-and-publish-your-first-configurable-ruby-gem/</id>
+		<updated>2020-01-24T00:00:00+00:00</updated>
+
+		<author>
+			<name>Dhyego Calota</name>
+		</author>
+
+		<content type='html'>&lt;p&gt;You probably are a Ruby fan just like me and want to know how to share your work
+through an awesome configurable Ruby Gem, don’t you? Existing tutorials on the
+internet teach how to create a Ruby Gem but don’t teach you how to make your gem
+configurable and flexible to the developers which will make use of your
+incredible library. That’s exactly what we will be doing today.&lt;/p&gt;
+
+</content>
+	</entry>
+  	
 	<entry>
 		<title>How maintanable is your React App?</title>
 		<link type='text/html' href='https://engineering.trio.dev/2019/04/how-maintainable-is-your-react-app/'/>
